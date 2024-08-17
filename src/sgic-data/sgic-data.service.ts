@@ -1,10 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSgicDatumDto } from './dto/create-sgic-datum.dto';
+import { CreateSgicCaso } from './dto/create-sgic-caso.dto';
 import { UpdateSgicDatumDto } from './dto/update-sgic-datum.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { SgicCaso } from './entities/sgic-caso.entity';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class SgicDataService {
-  create(createSgicDatumDto: CreateSgicDatumDto) {
+
+  constructor(
+    @InjectModel(SgicCaso.name)
+    private casosModel: Model<SgicCaso>,
+
+  ) { }
+
+
+  create(createSgicCaso: CreateSgicCaso) {
+    console.log(createSgicCaso);
     return 'This action adds a new sgicDatum';
   }
 

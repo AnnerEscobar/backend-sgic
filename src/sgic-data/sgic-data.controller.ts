@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { SgicDataService } from './sgic-data.service';
-import { CreateSgicDatumDto } from './dto/create-sgic-datum.dto';
+import { CreateSgicCaso } from './dto/create-sgic-caso.dto';
 import { UpdateSgicDatumDto } from './dto/update-sgic-datum.dto';
 
 @Controller('sgic-data')
@@ -8,8 +8,9 @@ export class SgicDataController {
   constructor(private readonly sgicDataService: SgicDataService) {}
 
   @Post()
-  create(@Body() createSgicDatumDto: CreateSgicDatumDto) {
-    return this.sgicDataService.create(createSgicDatumDto);
+  create(@Body() createSgicCasoDto: CreateSgicCaso) {
+    console.log(createSgicCasoDto);
+    return this.sgicDataService.create(createSgicCasoDto);
   }
 
   @Get()

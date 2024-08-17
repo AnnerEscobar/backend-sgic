@@ -1,4 +1,4 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateSgicDatumDto } from './create-sgic-datum.dto';
+import { CreateSgicCaso } from './create-sgic-caso.dto';
 
-export class UpdateSgicDatumDto extends PartialType(CreateSgicDatumDto) {}
+export class UpdateSgicDatumDto extends PartialType(CreateSgicCaso) {}

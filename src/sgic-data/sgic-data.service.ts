@@ -26,8 +26,6 @@ export class SgicDataService {
     }
   }
 
-
-
   findAll() {
     return `This action returns all sgicData`;
   }

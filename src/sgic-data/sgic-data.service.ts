@@ -10,6 +10,7 @@ export class SgicDataService {
 
   constructor(
     @InjectModel(SgicCaso.name)
+    
     private casosModel: Model<SgicCaso>,
 
   ) { }

@@ -1,11 +1,38 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-user.dto';
-import { UpdateAuthDto } from './dto/update-user.dto';
+import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { CreateUser } from './dto/create-user.dto';
+import { UpdateUser } from './dto/update-user.dto';
+import * as bcryptjs from 'bcryptjs';
+import { User } from './entities/auth.entity';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+
+  constructor(
+    @InjectModel(User.name)
+    private userModel: Model<User>,
+  ) { }
+
+  async create(createUserDto: CreateUser): Promise<User> {
+
+    try {
+
+      const {password, ...userData} = createUserDto;
+
+      const newUser = new this.userModel({
+        password: bcryptjs.hashSync(password, 10),
+        ...userData
+      })
+
+      return await newUser.save();
+
+    } catch (error) {
+      if (error.code === 11000) {
+        throw new BadRequestException(`${createUserDto.email} already exist!!!`)
+      }
+      throw new InternalServerErrorException(`Something was wrong`)
+    }
   }
 
   findAll() {
@@ -16,7 +43,7 @@ export class AuthService {
     return `This action returns a #${id} auth`;
   }
 
-  update(id: number, updateAuthDto: UpdateAuthDto) {
+  update(id: number, updateAuthDto: UpdateUser) {
     return `This action updates a #${id} auth`;
   }
 

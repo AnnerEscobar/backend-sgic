@@ -14,7 +14,11 @@ app.enableCors();
     })
   );
 
-  await app.listen( process.env.PORT ?? 3000);
+  const PORT = process.env.PORT ?? 3000;
+
+  console.log(`this app is running on ${PORT}, `)
+
+  await app.listen( PORT);
 
 }
 bootstrap();

@@ -10,6 +10,8 @@ import { ConfigModule } from '@nestjs/config';
       MongooseModule.forRoot(process.env.MONGO_URI,{
         dbName: process.env.MONGO_DB_NAME,
       }),
+
+      
       AuthModule, SgicDataModule,],
     controllers: [],
     providers: [],

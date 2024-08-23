@@ -16,7 +16,7 @@ app.enableCors();
 
   const PORT = process.env.PORT ?? 3000;
 
-  console.log(`this app is running on ${PORT}, `)
+  console.log(`this app is running on ${PORT}, port`)
 
   await app.listen( PORT);
 

@@ -5,13 +5,18 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { SchemaCaso, SgicCaso, } from './entities/sgic-caso.entity';
 
 @Module({
+
   controllers: [SgicDataController],
+
   providers: [SgicDataService],
-  imports:[
+
+  imports: [
+
     MongooseModule.forFeature([{
       name: SgicCaso.name,
       schema: SchemaCaso,
     }])
+    
   ]
 })
-export class SgicDataModule {}
+export class SgicDataModule { }

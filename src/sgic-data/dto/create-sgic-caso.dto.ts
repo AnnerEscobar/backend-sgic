@@ -1,4 +1,6 @@
-import { IsDateString, IsISBN, IsNumber, IsString, isString, MinLength, minLength } from "class-validator";
+import { CaseTipo } from './case-tipo.enum';
+import {IsOptional, IsString, isString, MinLength, minLength, ValidateIf } from "class-validator";
+
 
 export class CreateSgicCaso {
 
@@ -11,8 +13,9 @@ export class CreateSgicCaso {
     @IsString()
     deicNumber: string;
 
+    @ValidateIf(o => o.CaseTipo === CaseTipo.ALERTA)
     @IsString()
-    alertaNumber: string;
+    alertaNumber?: string;
 
     @IsString()
     desaparecidoName: string;
@@ -31,5 +34,9 @@ export class CreateSgicCaso {
 
     @IsString()
     investigacionStatus: string;
+
+    @IsString()
+    userId:string;
+
 
 }

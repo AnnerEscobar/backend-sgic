@@ -11,4 +11,5 @@ export class RegisterUserDto {
 
     @MinLength(6)
     password: string;
+    
 }

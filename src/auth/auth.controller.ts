@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUser, loginDto, RegisterUserDto } from './dto/index';
 import { AuthGuard } from './guards/auth.guard';
@@ -25,6 +25,7 @@ export class AuthController {
     return this.authService.register(RegisterDto);
   }
 
+  
   @UseGuards(AuthGuard)
   @Get()
   findAll(@Request() req: Request ) {
@@ -54,9 +55,10 @@ export class AuthController {
   update(@Param('id') id: string, @Body() updateAuthDto: UpdateUser) {
     return this.authService.update(+id, updateAuthDto);
   }
+*/
 
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.authService.remove(+id);
-  } */
+  } 
 }

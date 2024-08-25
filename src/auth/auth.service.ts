@@ -45,13 +45,12 @@ export class AuthService {
   async register(RegisterDto: RegisterUserDto): Promise<loginResponse>{
 
     const user = await this.create(RegisterDto);
-    console.log({user});
-
     return{
       user: user,
       token: this.getJwtToken({id: user._id}),
     }
   }
+
 
   //metodo para loguearse
   async login(LoginDto: loginDto): Promise<loginResponse> {
@@ -72,6 +71,7 @@ export class AuthService {
       token: this.getJwtToken({ id: user.id }),
     }
   }
+
 
 
   findAll(): Promise<User[]> {

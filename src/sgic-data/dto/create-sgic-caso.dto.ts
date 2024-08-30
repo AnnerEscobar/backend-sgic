@@ -1,5 +1,5 @@
 import { CaseTipo } from './case-tipo.enum';
-import {IsOptional, IsString, isString, MinLength, minLength, ValidateIf } from "class-validator";
+import {ArrayMinSize, IsArray, IsOptional, IsString, isString, MinLength, minLength, ValidateIf } from "class-validator";
 
 
 export class CreateSgicCaso {
@@ -15,19 +15,19 @@ export class CreateSgicCaso {
 
     @ValidateIf(o => o.CaseTipo === CaseTipo.ALERTA)
     @IsString()
-    alertaNumber?: string;
+    alertaNumber?: string | '';
 
     @IsString()
-    desaparecidoName: string;
+    Name: string;
 
     @IsString()
-    desaparecidoAge: string;
+    Age: string;
 
     @IsString()
-    desaparecidoLugar: string;
+    Lugar: string;
 
     @IsString()
-    desaparecidoGps: string;
+    Gps: string;
 
     @IsString()
     investigadorName: string;
@@ -38,5 +38,8 @@ export class CreateSgicCaso {
     @IsString()
     userId:string;
 
+    @IsArray()
+    @ArrayMinSize(1,{message: 'Debes subir almenos un archivo'})
+    files: string[];
 
 }

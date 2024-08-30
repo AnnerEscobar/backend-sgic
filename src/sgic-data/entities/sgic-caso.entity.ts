@@ -13,20 +13,20 @@ export class SgicCaso extends Document {
   @Prop({ required: true, unique: true })
   deicNumber: string;
 
-  @Prop({sparse: true})  // sparse permite valores null sin violar la restricción de unicidad
-  alertaNumber?: string | null;
+  @Prop({ sparse: true })  // sparse permite valores null sin violar la restricción de unicidad
+  alertaNumber?: string | '';
 
   @Prop({ required: true })
-  desaparecidoName: string;
+  Name: string;
 
   @Prop({ required: true })
-  desaparecidoAge: string;
+  Age: string;
 
   @Prop({ required: true })
-  desaparecidoLugar: string;
+  Lugar: string;
 
   @Prop({ required: true })
-  desaparecidoGps: string;
+  Gps: string;
 
   @Prop({ required: true })
   investigadorName: string;
@@ -37,13 +37,19 @@ export class SgicCaso extends Document {
   @Prop({ required: true })
   userId: string;
 
+  @Prop({required: true})
+  files: string[];
+
 }
 
 export const SchemaCaso = SchemaFactory.createForClass(SgicCaso);
-SchemaCaso.index({ mpNumber: 1, deicNumber: 1, alertaNumber: 1, userId: 1 }, { unique: true });
+SchemaCaso.index(
+  { deicNumber: 1, mpNumber: 1 },
+  { unique: true }
+);
 
 // Validación condicional de alertaNumber
-SchemaCaso.path('alertaNumber').validate(function(value) {
+SchemaCaso.path('alertaNumber').validate(function (value) {
   if (this.caseTipo === 'Alerta') {
     return value != null && value.trim() !== '';
   }
